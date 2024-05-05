@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe("contact form", () => {
-  // ______________________________________________________________________
+  //NOTE:  ______________________________________________________________________
   beforeEach(() => {
     cy.visit("http://localhost:5173/about");
   });
@@ -30,5 +30,26 @@ describe("contact form", () => {
       expect(el.text()).to.not.eq("Sending...");
     });
     cy.get('[data-cy="contact-btn-submit"]').contains("Send Message");
+    // ______________________________________________________________________
+    cy.get('[data-cy="contact-input-message"]').focus().blur();
+    cy.get('[data-cy="contact-input-message"]')
+      .parent()
+      .should((el) => {
+        expect(el.attr("class")).to.contains("invalid");
+      });
+    // ______________________________________________________________________
+    cy.get('[data-cy="contact-input-name"]').focus().blur();
+    cy.get('[data-cy="contact-input-name"]')
+      .parent()
+      .should((el) => {
+        expect(el.attr("class")).to.contains("invalid");
+      });
+    // ______________________________________________________________________
+    cy.get('[data-cy="contact-input-email"]').focus().blur();
+    cy.get('[data-cy="contact-input-email"]')
+      .parent()
+      .should((el) => {
+        expect(el.attr("class")).to.contains("invalid");
+      });
   });
 });
