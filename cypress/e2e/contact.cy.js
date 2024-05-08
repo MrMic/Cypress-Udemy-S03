@@ -31,8 +31,9 @@ describe("contact form", () => {
     });
     cy.get('[data-cy="contact-btn-submit"]').contains("Send Message");
     // ______________________________________________________________________
-    cy.get('[data-cy="contact-input-message"]').focus().blur();
-    cy.get('[data-cy="contact-input-message"]')
+    cy.get('[data-cy="contact-input-message"]').as("msgInput");
+    cy.get("@msgInput").focus().blur();
+    cy.get("@msgInput")
       .parent()
       .should((el) => {
         expect(el.attr("class")).to.contains("invalid");
